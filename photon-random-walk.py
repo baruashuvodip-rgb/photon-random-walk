@@ -6,6 +6,7 @@ def step_np(mu,sigma,N):
     z = np.random.normal(loc=mu,scale=sigma,size=N)
     return x,y,z
 
+#simulated over a single cartesian coordinate for simplicity, but can be extended to 3D by adding y and z coordinates
 # simulate random walk over 1 second
 
 x, y, z = step_np(0.0, 0.00577, 100000000)
@@ -13,7 +14,7 @@ x_coord = np.cumsum(x)
 y_coord = np.cumsum(y)
 z_coord = np.cumsum(z)
 # modelling the random distance travelled by a photon between collisions, with 10^8 steps per second
-s = np.sqrt(x**2 + y**2 + z**2) # distance travelled by photon in each step
+#s = np.sqrt(x**2 + y**2 + z**2) # distance travelled by photon in each step
 with open("random_walk_1s.txt", "w") as f:
     for i in range(0, 100000000, 10000):
         f.write(f"{x_coord[i]} {y_coord[i]} {z_coord[i]}\n")
@@ -25,7 +26,7 @@ x_coord = np.cumsum(x)
 y_coord = np.cumsum(y)
 z_coord = np.cumsum(z)
 # modeling the random distance travelled by a photon each second, with 3.1536e7 steps per year
-s = np.sqrt(x**2 + y**2 + z**2) # distance travelled by photon in each second
+#s = np.sqrt(x**2 + y**2 + z**2) # distance travelled by photon in each second
 with open("random_walk_1y.txt", "w") as f:
     for i in range(0, 31536000, 1000):
         f.write(f"{x_coord[i]} {y_coord[i]} {z_coord[i]}\n")
@@ -38,7 +39,9 @@ y_coord = np.cumsum(y)
 z_coord = np.cumsum(z)
 # modeling the random distance travelled by a photon each year, 
 # with 4.5e6 steps for the 4.5 million years it takes for the photon to exit the radius of the sun
-s = np.sqrt(x**2 + y**2 + z**2) # distance travelled by photon in each year
+#s = np.sqrt(x**2 + y**2 + z**2) # distance travelled by photon in each year
 with open("random_walk_4mil.txt", "w") as f:
     for i in range(0, 4500000, 1000):
+        if x_coord[i]**2 + y_coord[i]**2 + z_coord[i]**2 > 696000000**2: # check if photon has exited the sun
+            break
         f.write(f"{x_coord[i]} {y_coord[i]} {z_coord[i]}\n")
