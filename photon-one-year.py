@@ -1,16 +1,17 @@
 import numpy as np
 
 def step(mu,sigma):
-    x = np.random.normal(loc=mu,scale=sigma, size = 365*86400) # 1 year of seconds
-    y = np.random.normal(loc=mu,scale=sigma, size = 365*86400)
-    z = np.random.normal(loc=mu,scale=sigma, size = 365*86400)
-    return x,y,z
+    x = np.random.normal(loc=mu,scale=sigma, size = 365) # 1 year of seconds
+    return x
+total_x = []
 
-x, y, z = step(99.994757, 57.732) # mean and std dev of 1D distance travelled by photons in 1 second
-total_x = np.sum(x)
-total_y = np.sum(y)
-total_z = np.sum(z)
+for i in range(100000): 
+    x = step(0.0, 16900) # mean and std dev of 1D distance travelled by photons in 1 second
+    total_x.append(np.sum(x))
 
-s = np.sqrt(total_x**2 + total_y**2 + total_z**2)
+std_distance = np.std(total_x)
 
-print(f"Distance travelled by photons in 1 year: {s} meters")
+print(f"Standard deviation of distance travelled by photons in 1 year: {std_distance} meters")
+
+
+#doing this for 4.6 million years would require nearly 200 days of computation time on my machine, so I will not do that.

@@ -16,10 +16,11 @@ print(f"RMS 1D distance travelled by photons: {rms_distance}")
 
 #results are similar to gaussian_step.py, but off by some magnitude. different units?
 
-import matplotlib.pyplot as plt
+'''import matplotlib.pyplot as plt
 plt.hist(x, bins='fd', label="avg dist")
 plt.xlabel("distance travelled in 1 second")
 plt.ylabel("Number of photons")
-plt.show()
+plt.show()'''
 
-#not a gaussian distribution. the peak is skewed to the left with a long tail to the right.
+#3d distance is not a gaussian distribution. the peak is skewed to the left with a long tail to the right.
+#1d distance is essentially a gaussian distribution, with only a slight skew to the left.
